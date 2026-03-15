@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import QueryClientProviders from "./providers/query-client-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,22 +30,24 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <header className="p-4 border-b">
-          <nav>
-            <ul className="flex gap-4">
-              <li>
-                <Link href="/">Home</Link>
-              </li>
-              <li>
-                <Link href="/products">Products</Link>
-              </li>
-              <li>
-                <Link href="/profile">Profile</Link>
-              </li>
-            </ul>
-          </nav>
-        </header>
-        {children}
+        <QueryClientProviders>
+          <header className="p-4 border-b">
+            <nav>
+              <ul className="flex gap-4">
+                <li>
+                  <Link href="/">Home</Link>
+                </li>
+                <li>
+                  <Link href="/products">Products</Link>
+                </li>
+                <li>
+                  <Link href="/profile">Profile</Link>
+                </li>
+              </ul>
+            </nav>
+          </header>
+          {children}
+        </QueryClientProviders>
       </body>
     </html>
   );
